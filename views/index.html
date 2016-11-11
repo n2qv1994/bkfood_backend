@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Case</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="../public/css/demo.css" type="text/css" media="screen" /> -->
+    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/custom.css" type="text/css" media="screen" />
+    <script type="text/javascript" href="/scripts/app.js"></script>
+    <script type="text/javascript" href="/scripts/client_controller/home.js"></script>
+</head>
+
+<body ng-app="bkfoodApp">
+    <div class="header">
+    </div>
+    <div class="inner">
+        <div ng-view=""></div>
+    </div>
+    <div class="footer">
+    </div>
+</body>
+<script type="text/javascript">
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+<!-- jQuery -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<!-- FlexSlider -->
+<script defer src="/js/jquery.flexslider.js"></script>
+<script type="text/javascript">
+(function() {
+
+    // store the slider in a local variable
+    var $window = $(window),
+        flexslider = {
+            vars: {}
+        };
+
+    // tiny helper function to add breakpoints
+    function getGridSize() {
+        return (window.innerWidth < 600) ? 2 :
+            (window.innerWidth < 900) ? 3 : 4;
+        (window.innerWidth > 1280) ? 6: 8;
+
+    }
+
+    $window.load(function() {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            animationSpeed: 1000,
+            animationLoop: false,
+            itemWidth: 210,
+            itemMargin: 5,
+            minItems: getGridSize(), // use function to pull in initial value
+            maxItems: getGridSize(), // use function to pull in initial value
+            start: function(slider) {
+                $('body').removeClass('loading');
+                flexslider = slider;
+            }
+        });
+    });
+
+    // check grid size on resize event
+    $window.resize(function() {
+        var gridSize = getGridSize();
+
+        flexslider.vars.minItems = gridSize;
+        flexslider.vars.maxItems = gridSize;
+    });
+
+}());
+</script>
+
+</html>
