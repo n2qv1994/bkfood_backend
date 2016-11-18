@@ -13,6 +13,8 @@ module.exports.sign_up = function(req,res) {
 	user.phone	  = req.body.phone;
 	user.location = req.body.location;
 	user.avatar   = req.body.avatar;
+	user.status   = req.body.status;
+	user.role     = req.body.role;
 	guestManagement.create_user(user, function(err,result) {
 		if(err){
 			return res.status(500).send(result);
@@ -25,7 +27,7 @@ module.exports.login = function(req, res) {
 	var user = {};
 	user.username = req.params.username;
 	user.password = req.params.password;
-	console.log(user);
+	//console.log(user);
 	guestManagement.login(user, function(err,result) {
 		if(err){
 			return res.status(500).send(result);
