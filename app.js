@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+// var cors         = require('cors');
 
 var dbConfig = require('./config/database.config.json');
 var mongoService = require('./db/mongo.service');
@@ -13,8 +14,15 @@ app.use(express.static(__dirname + '/views'));
 // app.set('views', __dirname + '/views');
 // app.engine('html', require('ejs').renderFile);
 // app.set('view engine', 'ejs');
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  next();
+});
 
 app.set('port', process.env.PORT || 3000);
+
 // app.set('view engine', 'html');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
