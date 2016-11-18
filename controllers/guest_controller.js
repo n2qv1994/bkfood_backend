@@ -22,6 +22,19 @@ var guestManagement = new GuestMamagement(connection);
 // 	});		
 // };
 module.exports.sign_up = function(req,res) {
+// <<<<<<< HEAD
+// 	var user = {};
+// 	user.username = req.body.username;
+// 	user.password = req.body.password;
+// 	user.email	  = req.body.email;
+// 	user.name	  = req.body.name;
+// 	user.sex	  = req.body.sex;
+// 	user.phone	  = req.body.phone;
+// 	user.location = req.body.location;
+// 	user.avatar   = req.body.avatar;
+// 	user.status   = req.body.status;
+// 	user.role     = req.body.role;
+// =======
 	var user = new User();
 	user.setUsername(req.body.username);
 	user.setPassword(req.body.password);
@@ -31,6 +44,7 @@ module.exports.sign_up = function(req,res) {
 	user.setPhone(req.body.phone);
 	user.setLocation(req.body.location);
 	user.setAvatar(req.body.avatar);
+	
 	guestManagement.create_user(user, function(err,result) {
 		if(err){
 			return res.status(500).send(result);
@@ -45,6 +59,7 @@ module.exports.login = function(req, res) {
 	user_login.username = req.body.username;
 	user_login.password = req.body.password;
 	guestManagement.login(user_login, function(err,result) {
+
 		if(err){
 			return res.status(500).send(result);
 		}
