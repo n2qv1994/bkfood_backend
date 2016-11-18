@@ -9,12 +9,13 @@ router.post("/signup", guestController.sign_up);
 // router.get('/login/:username/:password', guestController.login);
 router.post('/login', guestController.login);
 router.get('/search/:keyword');
+router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
-router.get('/delete/:username/:password', customerController.deleteAccount);
+router.post('/delete', customerController.deleteAccount);
 router.get('/upgrade:username');
 router.get('/order');
-router.post('/edit/:username');
+router.post('/editprofile/:username');
 router.get('/viewprofile:');
 //api provider
 router.get('/resign/:username');
@@ -24,7 +25,5 @@ router.post('/addproduct');
 // router.get('/editproduct');
 // router.get('/removeproduct');
 
-//test
-router.get('/test/:username', test.testdb);
 
 module.exports = router;

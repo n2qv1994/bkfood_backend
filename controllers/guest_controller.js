@@ -24,14 +24,6 @@ var guestManagement = new GuestMamagement(connection);
 module.exports.sign_up = function(req,res) {
 // <<<<<<< HEAD
 // 	var user = {};
-// 	user.username = req.body.username;
-// 	user.password = req.body.password;
-// 	user.email	  = req.body.email;
-// 	user.name	  = req.body.name;
-// 	user.sex	  = req.body.sex;
-// 	user.phone	  = req.body.phone;
-// 	user.location = req.body.location;
-// 	user.avatar   = req.body.avatar;
 // 	user.status   = req.body.status;
 // 	user.role     = req.body.role;
 // =======
