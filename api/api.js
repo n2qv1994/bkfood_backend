@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var guestController = require("../controllers/guest_controller.js");
 var customerController = require('../controllers/customer_controller');
-var test = require('../test');
 //api guest
 
 router.post("/signup", guestController.sign_up); 
@@ -25,6 +24,6 @@ router.post('/addproduct');
 // router.get('/removeproduct');
 
 //test
-router.get('/test/:username', test.testdb);
+
 
 module.exports = router;
