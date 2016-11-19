@@ -16,19 +16,18 @@ var verifyUser = function(user) {
         });
 };
 
-
 CustomerManagement.prototype.sign_out = function(user, callback) {
     var collection = this.connection.collection('customer');
 
-    var notifyLogoutSuccess = function() {
-        return callback(false);
+    var notifyLogoutSuccess = function(_user) {
+        notification.message = "success";
+        return callback(false,notification);
     };
 
-    var notifyLogoutFail = function() {
-        return callback(true);
+    var notifyLogoutFail = function(err) {
+        return callback(true,err);
     };
-
-    collection.updateOne({ username: user.username }, { status: false })
+    collection.update({ username: user.username },{ $set:{ status: false }})
         .then(notifyLogoutSuccess)
         .catch(notifyLogoutFail);
 };

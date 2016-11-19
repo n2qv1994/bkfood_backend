@@ -44,6 +44,7 @@ module.exports.sign_up = function(req,res) {
 	user.setPhone(req.body.phone);
 	user.setLocation(req.body.location);
 	user.setAvatar(req.body.avatar);
+	user.setStatus(false);
 	
 	guestManagement.create_user(user, function(err,result) {
 		if(err){
