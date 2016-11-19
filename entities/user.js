@@ -5,10 +5,14 @@ function User() {
     this.name = "";
     this.sex = "";
     this.phone = "";
-    this.role="";   
-    this.location = ""
+    this.location = "";
     this.avatar = "";
     this.status = false;
+    this.role = "";
+    this.time_begin = new Date();
+    this.time_end = new Date();
+    this.radius = 0;
+
 };
 User.prototype.setUsername = function(username) {
     this.username = username;
@@ -72,6 +76,42 @@ User.prototype.setStatus = function(status) {
 };
 User.prototype.getStatus = function() {
     return this.status;
+};
+
+User.prototype.setRole = function(role) {
+    this.role = role;
+    return this;
+};
+
+User.prototype.getRole = function() {
+    return this.role;
+};
+
+User.prototype.setTimeBegin = function(time) {
+    this.time_begin = time;
+    return this;
+};
+
+User.prototype.getTimeBegin = function() {
+    return this.time_begin;
+};
+
+User.prototype.setTimeEnd = function(time) {
+    this.time_end = time;
+    return this;
+};
+
+User.prototype.getTimeEnd = function() {
+    return this.time_end;
+};
+
+User.prototype.setRadius = function(radius) {
+    this.radius = radius;
+    return this;
+};
+
+User.prototype.getRadius = function() {
+    return this.radius;
 };
 
 module.exports = User;
