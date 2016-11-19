@@ -13,17 +13,26 @@ router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
 router.post('/delete', customerController.deleteAccount);
-router.get('/upgrade:username');
-router.get('/order');
+router.post('/upgrade:username');
+router.post('/order');
 router.post('/editprofile/:username');
-router.get('/viewprofile:');
+router.get('/viewprofile/:username');
+router.post('/review/:username/:product_id');
+router.get('/viewcart/:username');
+router.post('/editcart/')
 //api provider
-router.get('/resign/:username');
+router.post('/resign/:username');
 router.post('/addproduct');
 router.post('/editproduct');
-router.post('/addproduct');
-// router.get('/editproduct');
-// router.get('/removeproduct');
+router.post('/removeproduct');
+router.post('/confirm');
+//moderator
 
+//admin
+router.post('/addmod');
+router.post('/deletemod');
+router.post('/addcategory');
+router.post('/editcategory');
+router.post('/deletecategory');
 
 module.exports = router;
