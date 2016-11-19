@@ -13,7 +13,7 @@ router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
 router.post('/delete', customerController.deleteAccount);
-router.post('/upgrade:username');
+router.post('/upgrade', customerController.upgradeToProvider);
 router.post('/order');
 router.post('/editprofile/:username');
 router.get('/viewprofile/:username');
