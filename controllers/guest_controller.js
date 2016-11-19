@@ -22,11 +22,7 @@ var guestManagement = new GuestMamagement(connection);
 // 	});		
 // };
 module.exports.sign_up = function(req,res) {
-// <<<<<<< HEAD
-// 	var user = {};
-// 	user.status   = req.body.status;
-// 	user.role     = req.body.role;
-// =======
+
 	var user = new User();
 	user.setUsername(req.body.username);
 	user.setPassword(req.body.password);
@@ -36,7 +32,7 @@ module.exports.sign_up = function(req,res) {
 	user.setPhone(req.body.phone);
 	user.setLocation(req.body.location);
 	user.setAvatar(req.body.avatar);
-	
+	user.setStatus(false);	
 	guestManagement.create_user(user, function(err,result) {
 		if(err){
 			return res.status(500).send(result);

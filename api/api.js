@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var guestController = require("../controllers/guest_controller.js");
 var customerController = require('../controllers/customer_controller');
-var test = require('../test');
+var providerController = require('../controllers/provider_controller.js');
+
 //api guest
 
 router.post("/signup", guestController.sign_up); 
@@ -12,6 +13,7 @@ router.get('/search/:keyword');
 router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
+
 router.post('/delete', customerController.deleteAccount);
 router.post('/upgrade', customerController.upgradeToProvider);
 router.post('/order');
