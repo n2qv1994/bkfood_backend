@@ -1,12 +1,14 @@
 function User() {
-    this.username = "username";
+    this.username = "";
     this.password = "";
     this.email = "" ;
     this.name = "";
     this.sex = "";
     this.phone = "";
-    this.location = ""
-    this.avatar = "";   
+    this.location = "";
+    this.avatar = "";
+    this.status="";
+    this.role="";   
 };
 User.prototype.setUsername = function(username) {
     this.username = username;
