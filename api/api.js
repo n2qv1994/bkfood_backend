@@ -3,28 +3,38 @@ var router = express.Router();
 var guestController = require("../controllers/guest_controller.js");
 var customerController = require('../controllers/customer_controller');
 var providerController = require('../controllers/provider_controller.js');
+
 //api guest
 
 router.post("/signup", guestController.sign_up); 
 // router.get('/login/:username/:password', guestController.login);
 router.post('/login', guestController.login);
 router.get('/search/:keyword');
+router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
-router.get('/delete/:username/:password', customerController.deleteAccount);
-router.get('/upgrade:username');
-router.get('/order');
-router.post('/edit/:username');
-router.get('/viewprofile:');
+
+router.post('/delete', customerController.deleteAccount);
+router.post('/upgrade:username');
+router.post('/order');
+router.post('/editprofile/:username');
+router.get('/viewprofile/:username');
+router.post('/review/:username/:product_id');
+router.get('/viewcart/:username');
+router.post('/editcart/')
 //api provider
-router.get('/resign/:username');
-router.post('/addproduct',providerController.add_product);
-router.post('/editproduct', providerController.edit_product);
+router.post('/resign/:username');
+router.post('/addproduct');
+router.post('/editproduct');
 router.post('/removeproduct');
-// router.get('/editproduct');
-// router.get('/removeproduct');
+router.post('/confirm');
+//moderator
 
-//test
-
+//admin
+router.post('/addmod');
+router.post('/deletemod');
+router.post('/addcategory');
+router.post('/editcategory');
+router.post('/deletecategory');
 
 module.exports = router;
