@@ -29,20 +29,26 @@ ProviderManagement.prototype.edit_product = function(product, callback) {
         notification.message = "success";
         return callback(false, notification);
     };
-    //   product.setProductName(req.body.product_name);
-    // product.setProviderId(req.body.provider_id)
-    // product.setDescription(req.body.description);
-
-    // product.setUnit(req.body.unit);
-    // product.setCategory(req.body.category);
-    // product.setImage(req.body.image);
-
     var editFail = function(err) {
         return callback(true, err);
     };
-    // collection.update({ _id: product_id }, { $set:{ description: "xinh"}})
-    //     .then(editSuccess)
-    //     .catch(editFail);
+    collection.update({ _id: product_id }, { 
+        $set:{ 
+            product_name: product.getProductName(),
+            provider_id: product.getProviderId(),
+            description: product.getDescription(),
+            price: product.getPrice(),
+            unit:product.getUnit(),
+            category: product.getCategory(),
+            image: product.getImage()
+        }
+    })
+    .then(editSuccess)
+    .catch(editFail);
+};
+
+ProviderManagement.prototype.get_product_by_id = function() {
+    var collection = this.connection.collection('product');
     collection.findOne({_id:product_id})
     .then(function(result) {
         console.log(result);
@@ -50,15 +56,21 @@ ProviderManagement.prototype.edit_product = function(product, callback) {
     .catch(function(err){
         console.log(err);
     })
-    // collection.find("582ec2458c3aef1caa9ac3f9").toArray(function(err, result) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else if (result.length) {
-    //         console.log('Found:', result);
-    //     } else {
-    //         console.log('No document(s) found with defined "find" criteria!');
-    //     }
-    // });
+};
+
+ProviderManagement.prototype.delete_product = function(product_id, callback) {
+    var collection = this.connection.collection('product');
+    var deleteSuccess = function (product){
+        notification.message = "success";
+        return callback(false, notification);
+    };
+    var deleteFalure = function(err){
+        return callback(true,err);
+    }
+    collection.deleteOne({_id: product_id})
+    .then(deleteSuccess)
+    .catch(deleteFalure);
 }
+
 
 module.exports = ProviderManagement;

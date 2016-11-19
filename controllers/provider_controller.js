@@ -43,12 +43,13 @@ module.exports.edit_product = function(req, res) {
     });
 };
 
-module.exports.deleteProduct = function(req, res) {
-    var user = {};
-    user.username = req.params.username;
-    user.password = req.params.password;
+module.exports.get_product = function(req, res) {
 
-    providerManagement.deleteAccount(function(err, result) {
+};
+
+module.exports.delete_product = function(req, res) {
+    product_id = new ObjectID(req.body.product_id);
+    providerManagement.delete_product(product_id, function(err, result) {
         if (err) {
             return res.status(500).send(result);
         }

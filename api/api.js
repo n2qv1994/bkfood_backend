@@ -24,9 +24,9 @@ router.get('/viewcart/:username');
 router.post('/editcart/')
 //api provider
 router.post('/resign/:username');
-router.post('/addproduct');
-router.post('/editproduct');
-router.post('/removeproduct');
+router.post('/addproduct',providerController.add_product);
+router.post('/editproduct',providerController.edit_product);
+router.post('/removeproduct',providerController.delete_product);
 router.post('/confirm');
 //moderator
 
