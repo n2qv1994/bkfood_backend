@@ -43,10 +43,6 @@ module.exports.edit_product = function(req, res) {
     });
 };
 
-module.exports.get_product = function(req, res) {
-
-};
-
 module.exports.delete_product = function(req, res) {
     product_id = new ObjectID(req.body.product_id);
     providerManagement.delete_product(product_id, function(err, result) {

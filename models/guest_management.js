@@ -61,4 +61,5 @@ GuestManagement.prototype.login = function(user, callback) {
         .then(success)
         .catch(error);
 };
+
 module.exports = GuestManagement;

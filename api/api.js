@@ -3,13 +3,14 @@ var router = express.Router();
 var guestController = require("../controllers/guest_controller.js");
 var customerController = require('../controllers/customer_controller');
 var providerController = require('../controllers/provider_controller.js');
+var productController = require('../controllers/product_controller.js');
 
 //api guest
 
 router.post("/signup", guestController.sign_up); 
 // router.get('/login/:username/:password', guestController.login);
 router.post('/login', guestController.login);
-router.get('/search/:keyword');
+router.get('/search/:keyword', guestController.search_product_by_name);
 router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
@@ -36,5 +37,8 @@ router.post('/deletemod');
 router.post('/addcategory');
 router.post('/editcategory');
 router.post('/deletecategory');
+
+//product
+router.get('/getallproduct',productController.get_all_product);
 
 module.exports = router;
