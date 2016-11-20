@@ -7,11 +7,11 @@ var customerManagement = new CustomerManagement(connection);
 module.exports.sign_out = function(req, res) {
     var user = {};
     user.username = req.params.username;
-    customerManagement.sign_out(user, function(err,result) {
+    customerManagement.sign_out(user, function(err, result) {
         if (err) {
             return res.status(500).send(result);
         }
-        return res.status(201).send(result);
+        return res.status(200).send(result);
     });
 };
 
@@ -23,17 +23,23 @@ module.exports.deleteAccount = function(req, res) {
         if (err) {
             return res.status(500).send(result);
         }
-        return res.status(201).send(result);
+        return res.status(200).send(result);
     });
 };
 
-module.exports.upgradeToProvider=function(req, res){
-	var user= {};
-	user.username=req.body.username;
-	user.password=req.body.password;
+module.exports.upgradeToProvider = function(req, res) {
+    var user = {};
+    user.username = req.body.username;
+    user.location = req.body.location;
+    user.time_begin = req.body.time_begin;
+    user.time_end = req.body.time_end;
+    user.radius = req.body.radius;
 
-	customerManagement.upgradeToProvider(user, function(err, result){
-		
-	});
+    customerManagement.upgradeToProvider(user, function(err, result) {
+        if (err) {
+            return res.status(500).send(result);
+        }
+        return res.status(201).send(result);
+    });
 
 };
