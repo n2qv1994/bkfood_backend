@@ -6,23 +6,6 @@ var connection = database.getConnection();
 var guestManagement = new GuestMamagement(connection);	
 var productManagement = new ProductMamagement(connection);	
 
-// module.exports.sign_up = function(req,res) {
-// 	var new_user = {};
-// 	new_user.username = req.body.username;
-// 	new_user.password = req.body.password;
-// 	new_user.email	  = req.body.email;
-// 	new_user.name	  = req.body.name;
-// 	new_user.sex	  = req.body.sex;
-// 	new_user.phone	  = req.body.phone;
-// 	new_user.location = req.body.location;
-// 	new_user.avatar   = req.body.avatar;
-// 	guestManagement.create_user(new_user, function(err,result) {
-// 		if(err){
-// 			return res.status(500).send(result);
-// 		}
-// 		return res.status(201).send(result);
-// 	});		
-// };
 module.exports.sign_up = function(req,res) {
 
 	var user = new User();
@@ -37,7 +20,7 @@ module.exports.sign_up = function(req,res) {
 	user.setStatus(false);	
 	guestManagement.create_user(user, function(err,result) {
 		if(err){
-			return res.status(500).send(result);
+			return res.status(500).send(result.message);
 		}
 		return res.status(201).send(result);
 	});		
@@ -51,7 +34,7 @@ module.exports.login = function(req, res) {
 	guestManagement.login(user_login, function(err,result) {
 
 		if(err){
-			return res.status(500).send(result);
+			return res.status(500).send(result.message);
 		}
 		return res.status(201).send(result);
 	});		
