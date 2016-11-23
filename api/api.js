@@ -32,6 +32,7 @@ router.post('/confirm');
 //moderator
 
 //admin
+router.post('/signin');
 router.post('/addmod');
 router.post('/deletemod');
 router.post('/addcategory');
