@@ -27,14 +27,14 @@ ProductManagement.prototype.get_all_product = function(callback) {
 
 ProductManagement.prototype.search_product_by_name = function(keyword, callback) {
     var collection = this.connection.collection('product');
-    var _keyword = "/"+keyword+"/";
+    var _keyword = ".*"+keyword+".";
     var searchSuccess = function(product) {
         return callback(false,product.ops);
     };
     var searchFalure = function(err) {
         return callback(true,err);
     };
-    collection.find({product_name: {$regex: /.*ga./, $options:"i"}}).toArray(function (err, result) {
+    collection.find({product_name: {$regex: keyword, $options:"i"}}).toArray(function (err, result) {
       if (err) {
         notification.message = "can not get";
         return callback(true, notification);

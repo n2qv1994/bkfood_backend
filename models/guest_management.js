@@ -11,7 +11,6 @@ GuestManagement.prototype.create_user = function(user, callback) {
     };
     var register_failure = function(err) {
         notification.message = "register failure";
-        notification.error = err;
         return callback(true, notification);
     };
     collection.findOne({ username: user.username })
@@ -21,8 +20,8 @@ GuestManagement.prototype.create_user = function(user, callback) {
                     .then(register_success)
                     .catch(register_failure);
             } else {
-                notification.message = "username is exist";
-                return callback(true, notification.message)
+                notification.message = "username existed";
+                return callback(true, notification)
             }
         })
         .catch(function(err) {
@@ -43,6 +42,8 @@ GuestManagement.prototype.login = function(user, callback) {
                         return callback(false, _user);
                     })
                     .catch(function(err) {
+                        notification.message = "login false";
+                        notification.error = err;
                         return callback(true, err);
                     });
             } else {
@@ -53,6 +54,7 @@ GuestManagement.prototype.login = function(user, callback) {
     };
 
     var error = function(err) {
+        notification.message = "login false";
         notification.error = err;
         return callback(true, notification);
     };
