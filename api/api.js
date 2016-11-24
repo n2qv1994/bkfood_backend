@@ -4,6 +4,7 @@ var guestController = require("../controllers/guest_controller.js");
 var customerController = require('../controllers/customer_controller');
 var providerController = require('../controllers/provider_controller.js');
 var productController = require('../controllers/product_controller.js');
+var moderatorController=require('../controllers/moderator_controller.js');
 
 //api guest
 
@@ -27,6 +28,7 @@ router.post('/editcart/')
 router.post('/resign/:username');
 router.post('/confirm');
 //moderator
+router.post('/signin',moderatorController.signin);
 
 //admin
 router.post('/addmod');
