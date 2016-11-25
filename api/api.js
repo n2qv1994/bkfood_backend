@@ -5,6 +5,7 @@ var customerController = require('../controllers/customer_controller');
 var providerController = require('../controllers/provider_controller.js');
 var productController = require('../controllers/product_controller.js');
 var moderatorController = require('../controllers/moderator_controller.js');
+var adminController = require('../controllers/admin_controller.js');
 
 //api guest
 
@@ -36,7 +37,7 @@ router.post('/signin', moderatorController.signin);
 router.get('/getnewproduct/:category', moderatorController.get_new_product);
 // router.post('/deleteproduct', moderatorController.deleteProduct);
 //admin
-router.post('/addmod');
+router.post('/addmod', adminController.addModerator);
 router.post('/deletemod');
 router.post('/addcategory');
 router.post('/editcategory');
