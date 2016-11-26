@@ -23,6 +23,7 @@ var productManagement = new ProductMamagement(connection);
 // 		return res.status(201).send(result);
 // 	});		
 // };
+
 module.exports.sign_up = function(req,res) {
 
 	var user = new User();
