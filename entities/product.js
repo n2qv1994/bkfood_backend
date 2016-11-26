@@ -1,5 +1,5 @@
 function Product() {
-    this._id =""
+    this._id = ""
     this.product_name = "";
     this.provider_id = "";
     this.description = "";
@@ -8,6 +8,7 @@ function Product() {
     this.category = "";
     this.image = "";
     this.rank = ""
+    this.checked = false;
 };
 Product.prototype.setId = function(_id) {
     this._id = _id;

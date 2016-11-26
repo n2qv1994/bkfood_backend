@@ -90,8 +90,29 @@ CustomerManagement.prototype.upgradeToProvider = function(user, callback) {
         .then(NotifyUpgradeSuccess)
         .catch(notifyUpgradeFail);
 };
-// CustomerManagement.prototype.editProfile = function(user, callback) {
-//     var collection = this.connection.connection('customer');
-// }
+
+CustomerManagement.prototype.edit_profile = function(user, callback) {
+    var collection = this.connection.collection('customer');
+    var editSuccess = function(product) {
+        notification.message = "success";
+        return callback(false, notification);
+    };
+    var editFail = function(err) {
+        notification.message = "error:" + err;
+        return callback(true, notification);
+    };
+    collection.update({ _id: user.user_id }, { 
+        $set:{ 
+            name: user.name,
+            password:  user.password,
+            email:  user.email,
+            location:  user.location,
+            phone: user.phone,
+        }
+    })
+    .then(editSuccess)
+    .catch(editFail);
+};
+
 
 module.exports = CustomerManagement;

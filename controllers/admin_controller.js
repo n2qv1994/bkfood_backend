@@ -1,7 +1,4 @@
-var Moderator_management = require('../models/moderator_management');
-var User = require('../entities/user.js');
 var Admin_management = require('../models/admin_management');
-var Provider = require('../models/provider_management');
 
 var database = require('../db/mongo.service');
 var connection = database.getConnection();
@@ -16,7 +13,7 @@ module.exports.add_mod = function (req, res) {
         if(err) {
             return res.status(500).send(result);
         } else {
-            return res.status(200).send(result);
+            return res.status(201).send(result);
         }
     })
 };
@@ -40,7 +37,7 @@ module.exports.add_category = function(req, res) {
         if(err) {
             return res.status(500).send(result);
         }
-        return res.status(200).send(result);
+        return res.status(201).send(result);
     });
 };
 

@@ -137,7 +137,7 @@ AdminManagement.prototype.delete_category = function(category, callback) {
     var collection = this.connection.collection('category');
 
     var deleteSuccess = function(result) {
-        notifycation.message = "success!";
+        notifycation.message = "delete success!";
         return callback(false,notifycation.message);
     };
 
