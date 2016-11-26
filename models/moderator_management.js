@@ -52,3 +52,39 @@ ModeratorManagement.prototype.getNewProduct = function(cate, callback) {
         .then(notifyFindSuccess)
         .catch(notifyFindFail);
 };
+
+// Doi password duoc admin ke thua
+ModeratorManagement.prototype.changePassword = function(manager, callback) {
+    var collection = this.connection.collection('manager');
+
+    var notifyFindFail = function(err) {
+        notification.message = "ERROR";
+        return callback(true, notification);
+    };
+
+    var verifyPassword = function(_manager) {
+
+        var notifyChangeFail = function(err) {
+            notification.message = "ERROR";
+            return callback(true, notification);
+        };
+
+        var notifyChanged = function() {
+            notification.message = "Password is changed!";
+            return callback(false, notification);
+        };
+
+        if (_manager.password == manager.password) {
+            collection.updateOne({ username: _manager.username }, { $set: { password: manager.newpassword } })
+                .then(notifyChanged)
+                .catch(notifyChangeFail);
+        } else {
+            notification.message = "Password is incorrect!";
+            return callback(false, notification);
+        }
+    };
+
+    collection.findOne({ username: manager.username })
+        .then(verifyPassword)
+        .catch(notifyFindFail);
+};

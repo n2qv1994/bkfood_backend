@@ -33,12 +33,14 @@ router.post('/removeproduct', providerController.delete_product);
 router.post('/confirm');
 //moderator
 router.post('/signin', moderatorController.signin);
+// router.post('/changepassword', moderatorController.changePassword); do admin ke thua tu mod
 // xem va xoa cac san pham khong hop le
 router.get('/getnewproduct/:category', moderatorController.get_new_product);
 // router.post('/deleteproduct', moderatorController.deleteProduct);
 //admin
 router.post('/addmod', adminController.addModerator);
 router.post('/deletemod', adminController.deleteModerator);
+router.post('/changepassword', moderatorController.changePassword);
 router.post('/addcategory');
 router.post('/editcategory');
 router.post('/deletecategory');
