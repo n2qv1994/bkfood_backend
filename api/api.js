@@ -38,7 +38,7 @@ router.get('/getnewproduct/:category', moderatorController.get_new_product);
 // router.post('/deleteproduct', moderatorController.deleteProduct);
 //admin
 router.post('/addmod', adminController.addModerator);
-router.post('/deletemod');
+router.post('/deletemod', adminController.deleteModerator);
 router.post('/addcategory');
 router.post('/editcategory');
 router.post('/deletecategory');

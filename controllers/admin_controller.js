@@ -19,3 +19,16 @@ module.exports.addModerator = function(req, res) {
         return res.status(201).send(result);
     });
 };
+
+module.exports.deleteModerator = function(req, res) {
+    var request = {};
+    request.username = req.body.username; //username cua moderator
+    request.password = req.body.password; //password cua admin
+
+    adminManagement.deleteModerator(request, function(err, result) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+        return res.status(201).send(result);
+    });
+};
