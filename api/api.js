@@ -41,6 +41,9 @@ router.post('/deletecategory');
 router.get('/getallproduct',productController.get_all_product);
 router.post('/addproduct',providerController.add_product);
 router.post('/editproduct',providerController.edit_product);
-router.post('/removeproduct',providerController.delete_product);
+// router.post('/removeproduct',providerController.delete_product);
+router.get('/removeproduct/:product_id',providerController.delete_product);
+router.get('/getproductbyproviderid/:provider_id', productController.get_product_by_provider_id);
+
 
 module.exports = router;

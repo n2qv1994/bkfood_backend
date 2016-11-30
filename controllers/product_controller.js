@@ -14,3 +14,12 @@ module.exports.get_all_product = function(req,res) {
 		return res.status(201).send(result);
 	});
 };
+module.exports.get_product_by_provider_id = function(req,res) {
+	var provider_id = req.params.provider_id;
+	productManagement.get_product_by_provider_id(provider_id, function(err,result) {
+		if(err){
+			return res.status(500).send(result);
+		}
+		return res.status(201).send(result);
+	});
+}

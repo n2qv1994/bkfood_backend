@@ -35,7 +35,7 @@ ProviderManagement.prototype.edit_product = function(product, callback) {
     collection.update({ _id: product_id }, { 
         $set:{ 
             product_name: product.getProductName(),
-            provider_id: product.getProviderId(),
+            // provider_id: product.getProviderId(),
             description: product.getDescription(),
             price: product.getPrice(),
             unit:product.getUnit(),
