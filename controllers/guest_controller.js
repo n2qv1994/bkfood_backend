@@ -6,6 +6,7 @@ var connection = database.getConnection();
 var guestManagement = new GuestMamagement(connection);	
 var productManagement = new ProductMamagement(connection);	
 
+
 module.exports.sign_up = function(req,res) {
 
 	var user = new User();

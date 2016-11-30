@@ -7,8 +7,8 @@ function User() {
     this.phone = "";
     this.location = "";
     this.avatar = "";
-    this.status = false;
-    this.role = 0;
+    this.status = false; // is logined or not?
+    this.role = 0; //
     this.time_begin = new Date();
     this.time_end = new Date();
     this.radius = 0;

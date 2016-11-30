@@ -90,6 +90,7 @@ CustomerManagement.prototype.upgradeToProvider = function(user, callback) {
         .then(NotifyUpgradeSuccess)
         .catch(notifyUpgradeFail);
 };
+
 CustomerManagement.prototype.edit_profile = function(user, callback) {
     var collection = this.connection.collection('customer');
     var editSuccess = function(product) {
