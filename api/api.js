@@ -15,7 +15,6 @@ router.get('/search/:keyword', guestController.search_product_by_name);
 // router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
-
 router.post('/delete', customerController.deleteAccount);
 router.post('/upgrade', customerController.upgradeToProvider);
 router.post('/order');
