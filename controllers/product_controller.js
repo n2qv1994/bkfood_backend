@@ -23,3 +23,13 @@ module.exports.get_product_by_provider_id = function(req,res) {
 		return res.status(201).send(result);
 	});
 }
+module.exports.get_product_by_category = function(req,res) {
+	var category = req.params.category;
+	var provider_id = req.params.provider_id;
+	productManagement.get_product_by_category(provider_id, category, function(err,result) {
+		if(err){
+			return res.status(500).send(result);
+		}
+		return res.status(201).send(result);
+	});
+}

@@ -1,5 +1,5 @@
 var notification = {};
-
+var ObjectID = require('mongodb').ObjectID;
 function GuestManagement(connection) {
     this.connection = connection;
 };
@@ -63,5 +63,31 @@ GuestManagement.prototype.login = function(user, callback) {
         .then(success)
         .catch(error);
 };
+
+GuestManagement.prototype.findById = function(id, callback) {
+    var collection = this.connection.collection('customer');
+    // var ObjectId =  'ObjectId("'+id+'")';
+    var ObjectId = new ObjectID(id);
+    collection.find({ _id : ObjectId }, function(err, user) {    
+        return callback(err, user);
+    })
+};
+
+
+GuestManagement.prototype.loginLocal = function(username, password, callback) {
+    var collection = this.connection.collection('customer');
+    collection.findOne({ username : username }, function(err, user) {
+        if (err){
+            return callback(err, false);
+        }
+        if (user.username == username && user.password == password) {
+            return callback(null, user);
+        }
+        else{
+            return callback(null,false);
+        }
+    });
+};
+
 
 module.exports = GuestManagement;

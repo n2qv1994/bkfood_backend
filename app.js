@@ -1,5 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var passport = require('passport');
 // var cors         = require('cors');
 var dbConfig = require('./config/database.config.json');
 var mongoService = require('./db/mongo.service');
@@ -28,6 +31,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use(session({
+  secret : "secret",
+  cookie: { maxAge: 60000 },
+  saveUninitialized: true,
+  resave: true,
+  store: new MongoStore({ url: 'mongodb://localhost:27017/bkfood' })
+}));
+// app.use(session({ secret: 'n2qv1994', 
+//                   cookie: { maxAge: 60000 },
+//                   resave: true, 
+//                   saveUninitialized: true, 
+//                   store: new MongoStore({ url: 'mongodb://localhost:27017/test' }) 
+//                   }));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 mongoService.connect(connectionString, function(err) {
     console.log('connection string:\n' + connectionString);
