@@ -18,8 +18,8 @@ module.exports.signin = function(req, res) {
 };
 
 // Xem va xoa cac san pham khong hop le
-module.exports.get_new_product = function(req, res) {
-    var category = parseInt(req.params.category);
+module.exports.getNewProduct = function(req, res) {
+    var category = req.params.category;
 
     moderatorManagement.getNewProduct(category, function(err, result) {
         if (err) {
@@ -38,6 +38,18 @@ module.exports.changePassword = function(req, res) {
     manager.newpassword = req.body.newpassword;
 
     moderatorManagement.changePassword(manager, function(err, result) {
+        if (err) {
+            return res.status(404).send(err);
+        }
+        return res.status(200).send(result);
+    });
+};
+// Xoa san pham khong hop le
+module.exports.deleteProduct = function(req, res) {
+    var product = {};
+    product._id = req.body._id;
+
+    moderatorManagement.deleteProduct(product, function(err, result) {
         if (err) {
             return res.status(404).send(err);
         }

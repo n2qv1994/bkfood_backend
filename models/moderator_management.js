@@ -36,7 +36,7 @@ ModeratorManagement.prototype.getNewProduct = function(cate, callback) {
 
     var notifyFindSuccess = function(products) {
         if (products == "" || products == null) {
-            notification.message = "No product found!";
+            notification.message = "No product is found!";
             return callback(false, notification);
         }
         return callback(false, notification);
@@ -87,4 +87,23 @@ ModeratorManagement.prototype.changePassword = function(manager, callback) {
     collection.findOne({ username: manager.username })
         .then(verifyPassword)
         .catch(notifyFindFail);
+};
+
+// Xoa san pham khong hop le
+ModeratorManagement.prototype.deleteProduct = function(product, callback) {
+    var collection = this.connection.collection('product');
+
+    var notifyDeleteSuccess = function(pro) {
+        console.log(pro);
+        notification.message = "Product is deleted!";
+        return callback(false, notification);
+    };
+
+    var notifyFail = function(err) {
+        return callback(true, null);
+    };
+// find that bai, can swa lai
+    collection.findOne({ _id: product._id })
+        .then(notifyDeleteSuccess)
+        .catch(notifyFail);
 };
