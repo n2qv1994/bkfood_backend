@@ -1,16 +1,20 @@
-var Admin_management = require('../models/admin_management');
+var AdminManagement = require('../models/admin_management');
+var ObjectID = require('mongodb').ObjectID;
 
 var database = require('../db/mongo.service');
 var connection = database.getConnection();
-var adminManagement = new Admin_management(connection);
+var adminManagement = new AdminManagement(connection);
 
-module.exports.add_mod = function (req, res) {
-    var mod = {};
-    mod.username = req.body.username;
-    mod.password = req.body.password;
+module.exports.addModerator = function(req, res) {
+    var manager = {};
+    manager.username = req.body.username;
+    manager.password = req.body.password;
+    manager.category = req.body.categoryID;
+    manager.role = req.body.role;
+    manager.status = false;
 
-    adminManagement.add_mod(mod, function(err, result) {
-        if(err) {
+    adminManagement.verifyModerator(manager, function(err, result) {
+        if (err) {
             return res.status(500).send(result);
         } else {
             return res.status(201).send(result);
@@ -18,35 +22,36 @@ module.exports.add_mod = function (req, res) {
     })
 };
 
-module.exports.delete_mod = function(req, res) {
-    var mod = {};
-    mod.username = req.body.username;
-    adminManagement.delete_mod(mod, function(err, result) {
-        if(err) {
+module.exports.deleteModerator = function(req, res) {
+    var manager = {};
+    manager.username = req.body.username; //username cua mod
+    manager.password = req.body.password; //pass cua admin
+
+    adminManagement.deleteModerator(manager, function(err, result) {
+        if (err) {
             return res.status(500).send(result);
         }
-
         return res.status(200).send(result);
     });
 };
 
-module.exports.add_category = function(req, res) {
+module.exports.addCategory = function(req, res) {
     var category = {};
     category.name = req.body.name;
-    adminManagement.add_category(category, function(err, result){
-        if(err) {
+    adminManagement.addCategory(category, function(err, result) {
+        if (err) {
             return res.status(500).send(result);
         }
         return res.status(201).send(result);
     });
 };
 
-module.exports.edit_category = function(req, res) {
+module.exports.editCategory = function(req, res) {
     var category = {};
+    category._id = new ObjectID(req.body._id);
     category.name = req.body.name;
-    category.categoryCode = req.body.categoryCode;
-    adminManagement.edit_category(category,function (err,result) {
-        if(err) {
+    adminManagement.editCategory(category, function(err, result) {
+        if (err) {
             return res.status(500).send(result);
         }
 
@@ -55,16 +60,15 @@ module.exports.edit_category = function(req, res) {
 
 };
 
-module.exports.delete_category = function(req, res) {
+module.exports.deleteCategory = function(req, res) {
     var category = {};
-    category.categoryCode = req.body.categoryCode;
+    category._id = new ObjectID(req.body._id); //id cua category
+    category.password = req.body.password; //pass cua admin
 
-    adminManagement.delete_category(category, function(err, result){
-        if(err) {
+    adminManagement.deleteCategory(category, function(err, result) {
+        if (err) {
             return res.status(500).send(result);
         }
-
         return res.status(200).send(result);
     });
 };
-

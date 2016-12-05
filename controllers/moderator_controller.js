@@ -1,4 +1,5 @@
 var ModeratorMamagement = require('../models/moderator_management.js');
+var ObjectID = require('mongodb').ObjectID;
 var database = require('../db/mongo.service.js');
 var connection = database.getConnection();
 
@@ -47,7 +48,7 @@ module.exports.changePassword = function(req, res) {
 // Xoa san pham khong hop le
 module.exports.deleteProduct = function(req, res) {
     var product = {};
-    product._id = req.body._id;
+    product._id = new ObjectID(req.body._id);
 
     moderatorManagement.deleteProduct(product, function(err, result) {
         if (err) {

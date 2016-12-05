@@ -94,16 +94,15 @@ ModeratorManagement.prototype.deleteProduct = function(product, callback) {
     var collection = this.connection.collection('product');
 
     var notifyDeleteSuccess = function(pro) {
-        console.log(pro);
-        notification.message = "Product is deleted!";
+        notification.message = pro.name + " is deleted!";
         return callback(false, notification);
     };
 
     var notifyFail = function(err) {
         return callback(true, null);
     };
-// find that bai, can swa lai
-    collection.findOne({ _id: product._id })
+    
+    collection.deleteOne({ _id: product._id })
         .then(notifyDeleteSuccess)
         .catch(notifyFail);
 };

@@ -41,13 +41,14 @@ router.post('/signin', moderatorController.signin); //OK
 router.post('/changepassword', moderatorController.changePassword); //OK
 // xem va xoa cac san pham khong hop le
 router.get('/getnewproduct/:category', moderatorController.getNewProduct); //OK
-router.post('/deleteproduct', moderatorController.deleteProduct);
+router.post('/deleteproduct', moderatorController.deleteProduct); //OK
+
 //admin
-router.post('/addmod', adminController.add_mod);
-router.post('/deletemod', adminController.delete_mod);
-router.post('/addcategory', adminController.add_category);
-router.post('/editcategory', adminController.edit_category);
-router.post('/deletecategory', adminController.delete_category);
+router.post('/addmod', adminController.addModerator); //OK
+router.post('/deletemod', adminController.deleteModerator); //OK
+router.post('/addcategory', adminController.addCategory); //OK
+router.post('/editcategory', adminController.editCategory); //OK
+router.post('/deletecategory', adminController.deleteCategory); //OK
 
 //product
 router.get('/getallproduct', productController.get_all_product);
