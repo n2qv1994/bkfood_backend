@@ -4,7 +4,7 @@ function AdminManagement(connection) {
 
 var notification = {};
 
-AdminManagement.prototype.verifyModerator = function(manager, callback) {
+AdminManagement.prototype.createModerator = function(manager, callback) {
     var collection = this.connection.collection('manager');
 
     var notifyFail = function(err) {
