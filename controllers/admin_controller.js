@@ -10,10 +10,9 @@ module.exports.addModerator = function(req, res) {
     manager.username = req.body.username;
     manager.password = req.body.password;
     manager.category = req.body.categoryID;
-    manager.role = req.body.role;
     manager.status = false;
 
-    adminManagement.verifyModerator(manager, function(err, result) {
+    adminManagement.createModerator(manager, function(err, result) {
         if (err) {
             return res.status(500).send(result);
         } else {
