@@ -10,9 +10,12 @@ var mongoService = require('./db/mongo.service');
 var connectionString = "mongodb://" + dbConfig.mongodb.host + ":" + dbConfig.mongodb.port + "/" + dbConfig.mongodb.dbname;
 
 var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var socket = io.of('/chat')
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+var list_user = [];
+// var http = require('http').Server(app);
+// var io = require('socket.io')(http);
+// var socket = io.of('/chat')
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
 // app.set('views', __dirname + '/views');
@@ -33,11 +36,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-  secret : "secret",
-  cookie: { maxAge: 60000 },
-  saveUninitialized: true,
-  resave: true,
-  store: new MongoStore({ url: 'mongodb://localhost:27017/bkfood' })
+    secret: "secret",
+    cookie: { maxAge: 60000 },
+    saveUninitialized: true,
+    resave: true,
+    store: new MongoStore({ url: 'mongodb://localhost:27017/bkfood' })
 }));
 // app.use(session({ secret: 'n2qv1994', 
 //                   cookie: { maxAge: 60000 },
@@ -55,13 +58,26 @@ mongoService.connect(connectionString, function(err) {
         process.exit(1);
     } else {
         app.use('/api', require('./api/api'));
-        app.get('/chat', function(req, res) {
-            res.sendFile(__dirname + '/views/login.html');
+        io.on('connection', function(socket) {
+            var user = {};
+            user.username = socket.handshake.query.username;
+            user.socket_id = socket.id;
+            list_user.push(user);
+            console.log(list_user);
+            socket.on('order', function(data) {
+                for (var i = 0; i < list_user.length; i++) {
+                    if (data.to === list_user[i].username) {
+                        user_recever = list_user[i];
+                        console.log("aaa1: " + list_user[i].username);
+                        console.log("aaa1: " + list_user[i].socket_id);
+                        console.log("aaa1"+data);
+                        socket.to(list_user[i].socket_id).emit('order', data);
+                        return; 
+                    }
+                };
+            });
         });
-        socket.on('connection', function(socket) {
-            console.log('a user connected');
-        });
-        http.listen(app.get('port'), function() {
+        server.listen(app.get('port'), function() {
             console.log('listening on *:3000');
         });
     }
