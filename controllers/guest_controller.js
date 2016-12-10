@@ -10,15 +10,14 @@ var productManagement = new ProductMamagement(connection);
 module.exports.sign_up = function(req,res) {
 
 	var user = new User();
-	user.setUsername(req.body.username);
-	user.setPassword(req.body.password);
-	user.setEmail(req.body.email);
-	user.setName(req.body.name);
-	user.setSex(req.body.sex);
-	user.setPhone(req.body.phone);
-	user.setLocation(req.body.location);
-	user.setAvatar(req.body.avatar);
-	user.setStatus(false);	
+	user.username = req.body.username;
+	user.password = req.body.password;
+	user.email = req.body.email;
+	user.name = req.body.name;
+	user.sex = req.body.sex;
+	user.phone =req.body.phone;
+	user.location = req.body.location;
+	user.avatar = req.body.avatar;
 	guestManagement.create_user(user, function(err,result) {
 		if(err){
 			return res.status(500).send(result.message);
