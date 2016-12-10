@@ -45,10 +45,10 @@ module.exports.edit_profile = function(req, res) {
 };
 module.exports.upgradeToProvider = function(req, res) {
     var user = {};
+    console.log(req.body.username);
     user.username = req.body.username;
-    user.location = req.body.location;
-    user.time_begin = req.body.time_begin;
-    user.time_end = req.body.time_end;
+    // user.time_begin = req.body.time_begin;
+    // user.time_end = req.body.time_end;
     user.radius = req.body.radius;
 
     customerManagement.upgradeToProvider(user, function(err, result) {

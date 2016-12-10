@@ -44,7 +44,7 @@ GuestManagement.prototype.login = function(user, callback) {
                     .catch(function(err) {
                         notification.message = "login false";
                         notification.error = err;
-                        return callback(true, err);
+                        return callback(true, notification);
                     });
             } else {
                 notification.message = "password incorrect";
@@ -74,20 +74,20 @@ GuestManagement.prototype.findById = function(id, callback) {
 };
 
 
-GuestManagement.prototype.loginLocal = function(username, password, callback) {
-    var collection = this.connection.collection('customer');
-    collection.findOne({ username : username }, function(err, user) {
-        if (err){
-            return callback(err, false);
-        }
-        if (user.username == username && user.password == password) {
-            return callback(null, user);
-        }
-        else{
-            return callback(null,false);
-        }
-    });
-};
+// GuestManagement.prototype.loginLocal = function(username, password, callback) {
+//     var collection = this.connection.collection('customer');
+//     collection.findOne({ username : username }, function(err, user) {
+//         if (err){
+//             return callback(err, false);
+//         }
+//         if (user.username == username && user.password == password) {
+//             return callback(null, user);
+//         }
+//         else{
+//             return callback(null,false);
+//         }
+//     });
+// };
 
 
 module.exports = GuestManagement;

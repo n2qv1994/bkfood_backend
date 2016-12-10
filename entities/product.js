@@ -1,5 +1,4 @@
 function Product() {
-    this._id = ""
     this.product_name = "";
     this.provider_id = "";
     this.unit = "";

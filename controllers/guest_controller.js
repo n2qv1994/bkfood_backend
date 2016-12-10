@@ -32,7 +32,7 @@ module.exports.login = function(req, res) {
 	user_login.username = req.body.username;
 	user_login.password = req.body.password;
 	guestManagement.login(user_login, function(err,result) {
-
+		console.log(result);
 		if(err){
 			return res.status(500).send(result.message);
 		}

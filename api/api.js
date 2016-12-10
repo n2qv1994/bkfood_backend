@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-require('../config/passport.js')(passport);
+// require('../config/passport.js')(passport);
 
 var guestController = require("../controllers/guest_controller.js");
 var customerController = require('../controllers/customer_controller');
@@ -14,7 +14,7 @@ var adminController = require('../controllers/admin_controller.js');
 
 router.post("/signup", guestController.sign_up);
 // router.get('/login/:username/:password', guestController.login);
-// router.post('/login', guestController.login);
+router.post('/login', guestController.login);
 router.get('/search/:keyword', guestController.search_product_by_name);
 // router.get('/viewproduct/:product_id');
 //api customer
@@ -54,23 +54,23 @@ router.post('/addproduct',providerController.add_product);
 router.post('/editproduct',providerController.edit_product);
 // router.post('/removeproduct',providerController.delete_product);
 router.get('/removeproduct/:product_id',providerController.delete_product);
-router.get('/getproductbyproviderid/:provider_id',isLoggedIn, productController.get_product_by_provider_id);
+router.get('/getproductbyproviderid/:provider_id', productController.get_product_by_provider_id);
 router.get('/getproductbycategory/:provider_id/:category', productController.get_product_by_category);
 
-//passport
-router.post('/login', passport.authenticate('local-login', { session: true }), function(req,res) {
-		// res.send("ok");
-		res.json({ user: req.user });
-});
+// //passport
+// router.post('/login', passport.authenticate('local-login', { session: true }), function(req,res) {
+// 		// res.send("ok");
+// 		res.json({ user: req.user });
+// });
 
-function isLoggedIn(req, res, next) {
+// function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
-        return next();
+//     // if user is authenticated in the session, carry on 
+//     if (req.isAuthenticated())
+//         return next();
 
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-};
+//     // if they aren't redirect them to the home page
+//     res.redirect('/');
+// };
 
 module.exports = router;

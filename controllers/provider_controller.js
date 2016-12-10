@@ -7,14 +7,13 @@ var providerManagement = new ProviderManagement(connection);
 
 module.exports.add_product = function(req, res) {
     var new_product = new Product();
-    new_product.setId(new ObjectID());
-    new_product.setProductName(req.body.product_name);
-    new_product.setProviderId(req.body.provider_id)
-    new_product.setDescription(req.body.description);
-    new_product.setPrice(req.body.price);
-    new_product.setUnit(req.body.unit);
-    new_product.setCategory(req.body.category);
-    new_product.setImage(req.body.image);
+    new_product.product_name = req.body.product_name;
+    new_product.provider_id = req.body.provider_id;
+    new_product.description = req.body.description;
+    new_product.price = req.body.price;
+    new_product.unit = req.body.unit;
+    new_product.category = req.body.category;
+    new_product.image = req.body.image;
     providerManagement.add_product(new_product, function(err, result) {
         if (err) {
             return res.status(500).send(result);
@@ -25,18 +24,15 @@ module.exports.add_product = function(req, res) {
 
 module.exports.edit_product = function(req, res) {
     var product = new Product();
-    var product_id = ObjectID(req.body.product_id);  
-    product.setId(product_id);
-    product.setProductName(req.body.product_name);
-    // product.setProviderId(req.body.provider_id)
-    product.setDescription(req.body.description);
-    product.setPrice(req.body.price);
-    product.setUnit(req.body.unit);
-    product.setCategory(req.body.category);
-    product.setImage(req.body.image);
-    console.log(req.body.price);
+    var _id = ObjectID(req.body.product_id);
+    product.product_name = req.body.product_name;
+    product.description = req.body.description;
+    product.price = req.body.price;
+    product.unit = req.body.unit;
+    product.category = req.body.category;
+    product.image = req.body.image;
 
-    providerManagement.edit_product(product, function(err, result) {
+    providerManagement.edit_product(_id, product, function(err, result) {
         if (err) {
             return res.status(500).send(result);
         }

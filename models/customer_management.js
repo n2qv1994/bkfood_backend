@@ -80,11 +80,10 @@ CustomerManagement.prototype.upgradeToProvider = function(user, callback) {
 
     collection.update({ username: user.username }, {
             $set: {
-                location: user.location,
-                time_begin: user.time_begin,
-                time_end: user.time_end,
+                // time_begin: user.time_begin,
+                // time_end: user.time_end,
                 radius: user.radius,
-                role: 1
+                role: true
             }
         })
         .then(NotifyUpgradeSuccess)
