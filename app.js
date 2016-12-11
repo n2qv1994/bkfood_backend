@@ -70,7 +70,7 @@ mongoService.connect(connectionString, function(err) {
                         user_recever = list_user[i];
                         console.log("aaa1: " + list_user[i].username);
                         console.log("aaa1: " + list_user[i].socket_id);
-                        console.log("aaa1"+data);
+                        console.log("aaa1"+data.to);
                         socket.to(list_user[i].socket_id).emit('order', data);
                         return; 
                     }
