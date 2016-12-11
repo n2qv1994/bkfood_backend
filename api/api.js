@@ -34,25 +34,29 @@ router.post('/addproduct', providerController.add_product);
 router.post('/editproduct', providerController.edit_product);
 router.post('/removeproduct', providerController.delete_product);
 router.post('/confirm');
+
+// Manager: Admin and Moderator
 //moderator
-router.post('/signin', moderatorController.signin);
-// router.post('/changepassword', moderatorController.changePassword); do admin ke thua tu mod
+router.post('/signin', moderatorController.signin); //OK
+router.post('/changepassword', moderatorController.changePassword); //OK
 // xem va xoa cac san pham khong hop le
-router.get('/getnewproduct/:category', moderatorController.get_new_product);
-// router.post('/deleteproduct', moderatorController.deleteProduct);
+router.get('/getnewproduct/:category', moderatorController.getNewProduct); //OK
+router.post('/deleteproduct', moderatorController.deleteProduct); //OK
+
 //admin
-router.post('/addmod',adminController.add_mod);
-router.post('/deletemod',adminController.delete_mod);
-router.post('/addcategory',adminController.add_category);
-router.post('/editcategory',adminController.edit_category);
-router.post('/deletecategory', adminController.delete_category);
+router.post('/addmod', adminController.addModerator); //OK
+router.post('/deletemod', adminController.deleteModerator); //OK
+router.post('/addcategory', adminController.addCategory); //OK
+router.post('/editcategory', adminController.editCategory); //OK
+router.post('/deletecategory', adminController.deleteCategory); //OK
 
 //product
-router.get('/getallproduct',productController.get_all_product);
+router.get('/getallproduct', productController.get_all_product);
 
-router.post('/addproduct',providerController.add_product);
-router.post('/editproduct',providerController.edit_product);
+router.post('/addproduct', providerController.add_product);
+router.post('/editproduct', providerController.edit_product);
 // router.post('/removeproduct',providerController.delete_product);
+
 router.get('/removeproduct/:product_id',providerController.delete_product);
 router.get('/getproductbyproviderid/:provider_id', productController.get_product_by_provider_id);
 router.get('/getproductbycategory/:provider_id/:category', productController.get_product_by_category);
@@ -62,6 +66,17 @@ router.get('/getproductbycategory/:provider_id/:category', productController.get
 // 		// res.send("ok");
 // 		res.json({ user: req.user });
 // });
+
+// router.get('/removeproduct/:product_id', providerController.delete_product);
+// router.get('/getproductbyproviderid/:provider_id', isLoggedIn, productController.get_product_by_provider_id);
+// router.get('/getproductbycategory/:provider_id/:category', productController.get_product_by_category);
+
+// //passport
+// router.post('/login', passport.authenticate('local-login', { session: true }), function(req, res) {
+//     // res.send("ok");
+//     res.json({ user: req.user });
+// });
+
 
 // function isLoggedIn(req, res, next) {
 
