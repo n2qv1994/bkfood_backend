@@ -158,7 +158,21 @@ ManagerManagement.prototype.deleteModerator = function(manager, callback) {
             return callback(true, null);
         });
 };
-
+ManagerManagement.prototype.delete_user = function(user_id, callback) {
+    var collection = this.connection.collection('customer');
+    console.log("2:"+user_id);
+    console.log(typeof user_id);
+     var deleteSuccess = function (product){
+        notification.message = "success";
+        return callback(false, notification);
+    };
+    var deleteFalure = function(err){
+        return callback(true,err);
+    }
+    collection.deleteOne({_id: user_id})
+    .then(deleteSuccess)
+    .catch(deleteFalure);
+};
 ManagerManagement.prototype.addCategory = function(category, callback) {
     var collection = this.connection.collection('category');
 

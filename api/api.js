@@ -45,8 +45,9 @@ router.post('/changepassword', moderatorController.changePassword); //OK
 // xem va xoa cac san pham khong hop le
 router.get('/getnewproduct/:category', moderatorController.getNewProduct); //OK
 router.post('/deleteproduct', moderatorController.deleteProduct); //OK
-router.get('/getallusers', moderatorController.get_all_users);
 
+router.get('/getallusers', moderatorController.get_all_users);
+router.get('/deleteuser/:user_id', moderatorController.delete_user); 
 //admin
 router.post('/addmod', adminController.addModerator); //OK
 router.post('/deletemod', adminController.deleteModerator); //OK

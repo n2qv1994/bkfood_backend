@@ -69,3 +69,15 @@ module.exports.get_all_users = function(req,res) {
         return res.status(201).send(result);
     });
 };
+
+module.exports.delete_user = function(req, res) {
+    console.log("1:"+ req.params.user_id);
+    var user_id = ObjectID(req.params.user_id);
+    moderatorManagement.delete_user(user_id, function(err, result) {
+        if (err) {
+            return res.status(500).send(result);
+        }
+        return res.status(200).send(result);
+    });
+};
+
