@@ -44,6 +44,25 @@ ProductManagement.prototype.search_product_by_name = function(keyword, callback)
     });
 };
 
+ProductManagement.prototype.search_provider_by_name = function(keyword, callback) {
+    var collection = this.connection.collection('customer');
+    var _keyword = ".*" + keyword + ".";
+    var searchSuccess = function(customer) {
+        return callback(false, product.ops);
+    };
+    var searchFalure = function(err) {
+        return callback(true, err);
+    };
+    collection.find({$and: [{role: true},{ name: { $regex: keyword, $options: "i" } }]}).toArray(function(err, result) {
+        if (err) {
+            notification.message = "can not get";
+            return callback(true, notification);
+        } else {
+            return callback(false, result);
+        }
+    });
+};
+
 ProductManagement.prototype.get_product_by_provider_id = function(provider_id, callback) {
     var collection = this.connection.collection('product');
     var searchSuccess = function(product) {

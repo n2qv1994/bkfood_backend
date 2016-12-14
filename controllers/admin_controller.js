@@ -1,4 +1,4 @@
-var AdminManagement = require('../models/admin_management');
+var AdminManagement = require('../models/manager_management.js');
 var ObjectID = require('mongodb').ObjectID;
 
 var database = require('../db/mongo.service');
@@ -15,9 +15,8 @@ module.exports.addModerator = function(req, res) {
     adminManagement.createModerator(manager, function(err, result) {
         if (err) {
             return res.status(500).send(result);
-        } else {
-            return res.status(201).send(result);
         }
+        return res.status(201).send(result);
     })
 };
 

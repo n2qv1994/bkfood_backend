@@ -1,12 +1,15 @@
-var ModeratorMamagement = require('../models/moderator_management.js');
+var ModeratorMamagement = require('../models/manager_management.js');
+var CustomerManagement = require('../models/customer_management.js');
 var ObjectID = require('mongodb').ObjectID;
 var database = require('../db/mongo.service.js');
 var connection = database.getConnection();
 
+var customerManagement = new CustomerManagement(connection);
 var moderatorManagement = new ModeratorMamagement(connection);
 
 module.exports.signin = function(req, res) {
     var manager = {};
+    console.log("signin");
     manager.username = req.body.username;
     manager.password = req.body.password;
 
@@ -55,5 +58,14 @@ module.exports.deleteProduct = function(req, res) {
             return res.status(404).send(err);
         }
         return res.status(200).send(result);
+    });
+};
+
+module.exports.get_all_users = function(req,res) {
+    customerManagement.get_all_users(function(err,result) {
+        if(err){
+            return res.status(500).send(result);
+        }
+        return res.status(201).send(result);
     });
 };

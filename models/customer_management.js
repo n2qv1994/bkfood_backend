@@ -113,5 +113,24 @@ CustomerManagement.prototype.edit_profile = function(user, callback) {
     .catch(editFail);
 };
 
+CustomerManagement.prototype.get_all_users = function(callback) {
+    var collection = this.connection.collection('customer');
+    var get_success = function(result) {
+        return callback(false, result.ops);
+    };
+    var get_failure = function(err) {
+        notification.message = "add failure";
+        notification.error = err;
+        return callback(true, notification);
+    };
 
+    collection.find().toArray(function(err, result) {
+        if (err) {
+            notification.message = "can not get";
+            callback(true, notification);
+        } else {
+            callback(false, result);
+        }
+    });
+}
 module.exports = CustomerManagement;

@@ -51,3 +51,15 @@ module.exports.search_product_by_name = function(req, res) {
 		return res.status(201).send(result);
 	});		
 };
+
+module.exports.search_provider_by_name = function(req, res) {
+
+	keyword = req.params.keyword;
+	productManagement.search_provider_by_name(keyword, function(err,result) {
+
+		if(err){
+			return res.status(500).send(result);
+		}
+		return res.status(201).send(result);
+	});		
+};

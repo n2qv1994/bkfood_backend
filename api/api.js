@@ -16,6 +16,7 @@ router.post("/signup", guestController.sign_up);
 // router.get('/login/:username/:password', guestController.login);
 router.post('/login', guestController.login);
 router.get('/search/:keyword', guestController.search_product_by_name);
+router.get('/searchprovider/:keyword', guestController.search_provider_by_name);
 // router.get('/viewproduct/:product_id');
 //api customer
 router.get('/signout/:username', customerController.sign_out);
@@ -35,6 +36,8 @@ router.post('/editproduct', providerController.edit_product);
 router.post('/removeproduct', providerController.delete_product);
 router.post('/confirm');
 
+
+
 // Manager: Admin and Moderator
 //moderator
 router.post('/signin', moderatorController.signin); //OK
@@ -42,6 +45,7 @@ router.post('/changepassword', moderatorController.changePassword); //OK
 // xem va xoa cac san pham khong hop le
 router.get('/getnewproduct/:category', moderatorController.getNewProduct); //OK
 router.post('/deleteproduct', moderatorController.deleteProduct); //OK
+router.get('/getallusers', moderatorController.get_all_users);
 
 //admin
 router.post('/addmod', adminController.addModerator); //OK
@@ -49,6 +53,7 @@ router.post('/deletemod', adminController.deleteModerator); //OK
 router.post('/addcategory', adminController.addCategory); //OK
 router.post('/editcategory', adminController.editCategory); //OK
 router.post('/deletecategory', adminController.deleteCategory); //OK
+
 
 //product
 router.get('/getallproduct', productController.get_all_product);
