@@ -1,4 +1,4 @@
-var CustomerManagement = require('../models/customer_management.js');
+var CustomerManagement = require('../models/user_management.js');
 var database = require('../db/mongo.service');
 var User = require('../entities/user.js');
 var connection = database.getConnection();

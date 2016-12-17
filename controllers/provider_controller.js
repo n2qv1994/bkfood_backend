@@ -1,4 +1,4 @@
-var ProviderManagement = require('../models/provider_management.js');
+var ProviderManagement = require('../models/user_management.js');
 var database = require('../db/mongo.service');
 var Product = require('../entities/product.js')
 var ObjectID = require('mongodb').ObjectID;

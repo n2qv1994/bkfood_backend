@@ -1,4 +1,4 @@
-var GuestMamagement = require('../models/guest_management.js');
+var GuestMamagement = require('../models/user_management.js');
 var ProductMamagement = require('../models/product_management.js');
 var database = require('../db/mongo.service.js');
 var User = require('../entities/user.js');

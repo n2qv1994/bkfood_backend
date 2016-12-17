@@ -1,5 +1,5 @@
 var ModeratorMamagement = require('../models/manager_management.js');
-var CustomerManagement = require('../models/customer_management.js');
+var CustomerManagement = require('../models/user_management.js');
 var ObjectID = require('mongodb').ObjectID;
 var database = require('../db/mongo.service.js');
 var connection = database.getConnection();
@@ -71,7 +71,6 @@ module.exports.get_all_users = function(req,res) {
 };
 
 module.exports.delete_user = function(req, res) {
-    console.log("1:"+ req.params.user_id);
     var user_id = ObjectID(req.params.user_id);
     moderatorManagement.delete_user(user_id, function(err, result) {
         if (err) {

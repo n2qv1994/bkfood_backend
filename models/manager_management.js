@@ -121,7 +121,7 @@ ManagerManagement.prototype.createModerator = function(manager, callback) {
                     .then(register_success)
                     .catch(register_failure);
             } else {
-                notification.message = "username existed";
+                notification = "username existed";
                 return callback(true, notification)
             }
         })
@@ -162,6 +162,20 @@ ManagerManagement.prototype.delete_user = function(user_id, callback) {
     var collection = this.connection.collection('customer');
     console.log("2:"+user_id);
     console.log(typeof user_id);
+     var deleteSuccess = function (product){
+        notification.message = "success";
+        return callback(false, notification);
+    };
+    var deleteFalure = function(err){
+        return callback(true,err);
+    }
+    collection.deleteOne({_id: user_id})
+    .then(deleteSuccess)
+    .catch(deleteFalure);
+};
+
+ManagerManagement.prototype.delete_mod = function(user_id, callback) {
+    var collection = this.connection.collection('manager');
      var deleteSuccess = function (product){
         notification.message = "success";
         return callback(false, notification);
@@ -248,6 +262,27 @@ ManagerManagement.prototype.deleteCategory = function(category, callback) {
         .catch(function(err) {
             return callback(true, null);
         });
+};
+
+ManagerManagement.prototype.get_all_mod = function(callback) {
+    var collection = this.connection.collection('manager');
+    var get_success = function(result) {
+        return callback(false, result.ops);
+    };
+    var get_failure = function(err) {
+        notification.message = "add failure";
+        notification.error = err;
+        return callback(true, notification);
+    };
+
+    collection.find().toArray(function(err, result) {
+        if (err) {
+            notification.message = "can not get";
+            callback(true, notification);
+        } else {
+            callback(false, result);
+        }
+    });
 };
 
 module.exports = ManagerManagement;

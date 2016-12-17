@@ -9,7 +9,7 @@ module.exports.addModerator = function(req, res) {
     var manager = {};
     manager.username = req.body.username;
     manager.password = req.body.password;
-    manager.category = req.body.categoryID;
+    manager.category = req.body.category;
     manager.status = false;
 
     adminManagement.createModerator(manager, function(err, result) {
@@ -20,18 +20,18 @@ module.exports.addModerator = function(req, res) {
     })
 };
 
-module.exports.deleteModerator = function(req, res) {
-    var manager = {};
-    manager.username = req.body.username; //username cua mod
-    manager.password = req.body.password; //pass cua admin
+// module.exports.deleteModerator = function(req, res) {
+//     var manager = {};
+//     manager.username = req.body.username; //username cua mod
+//     manager.password = req.body.password; //pass cua admin
 
-    adminManagement.deleteModerator(manager, function(err, result) {
-        if (err) {
-            return res.status(500).send(result);
-        }
-        return res.status(200).send(result);
-    });
-};
+//     adminManagement.deleteModerator(manager, function(err, result) {
+//         if (err) {
+//             return res.status(500).send(result);
+//         }
+//         return res.status(200).send(result);
+//     });
+// };
 
 module.exports.addCategory = function(req, res) {
     var category = {};
@@ -64,6 +64,25 @@ module.exports.deleteCategory = function(req, res) {
     category.password = req.body.password; //pass cua admin
 
     adminManagement.deleteCategory(category, function(err, result) {
+        if (err) {
+            return res.status(500).send(result);
+        }
+        return res.status(200).send(result);
+    });
+};
+
+module.exports.get_all_mod = function(req,res) {
+    adminManagement.get_all_mod(function(err,result) {
+        if(err){
+            return res.status(500).send(result);
+        }
+        return res.status(201).send(result);
+    });
+};
+
+module.exports.delete_mod = function(req, res) {
+    var mod_id = ObjectID(req.params.mod_id);
+    adminManagement.delete_mod(mod_id, function(err, result) {
         if (err) {
             return res.status(500).send(result);
         }
