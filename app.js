@@ -65,12 +65,12 @@ mongoService.connect(connectionString, function(err) {
             list_user.push(user);
             console.log(list_user);
             socket.on('order', function(data) {
+                console.log(data);
                 for (var i = 0; i < list_user.length; i++) {
                     if (data.to === list_user[i].username) {
                         user_recever = list_user[i];
                         console.log("aaa1: " + list_user[i].username);
                         console.log("aaa1: " + list_user[i].socket_id);
-                        console.log("aaa1"+data.to);
                         socket.to(list_user[i].socket_id).emit('order', data);
                         return; 
                     }
