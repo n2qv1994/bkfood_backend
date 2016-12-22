@@ -68,10 +68,20 @@ mongoService.connect(connectionString, function(err) {
                 console.log(data);
                 for (var i = 0; i < list_user.length; i++) {
                     if (data.to === list_user[i].username) {
-                        user_recever = list_user[i];
+                        // user_recever = list_user[i];
                         console.log("aaa1: " + list_user[i].username);
                         console.log("aaa1: " + list_user[i].socket_id);
                         socket.to(list_user[i].socket_id).emit('order', data);
+                        return; 
+                    }
+                };
+            });
+            socket.on('reply', function(data) {
+                 for (var i = 0; i < list_user.length; i++) {
+                    if (data.username === list_user[i].username) {
+                        console.log("aaa1: " + list_user[i].username);
+                        console.log("aaa1: " + list_user[i].socket_id);
+                        socket.to(list_user[i].socket_id).emit('reply', data.message);
                         return; 
                     }
                 };
